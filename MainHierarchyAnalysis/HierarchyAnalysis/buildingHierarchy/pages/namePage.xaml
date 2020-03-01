@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="HierarchyAnalysis.buildingHierarchy.namePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HierarchyAnalysis.buildingHierarchy"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+  
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Viewbox>
+            <TextBlock HorizontalAlignment="Center" Grid.Row="0" Margin="10"  Foreground="Black" FontFamily="./Resources/#Montserrat Medium" Text="Введите название сценария:" />
+        </Viewbox>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Row="2">
+                <Button x:Name="buttonGo" Command="{Binding GetName}" Content="Далее" Style="{DynamicResource RoundedButton}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Viewbox>
+            <Viewbox Grid.Row="1">
+                <TextBox  Width="{Binding ActualWidth, ElementName=buttonGo}" Height="{Binding ElementName=buttonGo, Path=ActualHeight}" Style="{DynamicResource RoundedTextBox}" Text="{Binding Name}" />
+            </Viewbox>
+
+        </Grid>
+    </Grid>
+</UserControl>
