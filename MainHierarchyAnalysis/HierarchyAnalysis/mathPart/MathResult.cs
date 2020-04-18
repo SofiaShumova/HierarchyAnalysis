@@ -90,7 +90,6 @@ namespace HierarchyAnalysis.mathPart
                 }
                 //str += "\n";
             }
-            //MessageBox.Show(str);
             return array;
         }
         
@@ -106,13 +105,22 @@ namespace HierarchyAnalysis.mathPart
         }
         public double[,] GetArrayCriterionsForPerson(AssessmentPeopleCriterion assessments, ObservableCollection<Criterion> criteria)
         {
+
             double[,] array = new double[criteria.Count, criteria.Count];
+            for(int i = 0; i < criteria.Count; i++)
+            {
+                for (int j = 0; j < criteria.Count; j++)
+                {
+                    array[i, j] = 0;
+                }
+            }
             int firstIndex, secondIndex;
             foreach (AssessmentCriterion assessment in assessments.assessmentCriteria)
             {
                 firstIndex = GetIndexCriterion(assessment.firstCriterion, criteria);
                 secondIndex = GetIndexCriterion(assessment.secondCriterion, criteria);
-
+                array[firstIndex, firstIndex] = 1;
+                array[secondIndex, secondIndex] = 1;
                 if (assessment.Assessment < 0)
                 {
                     array[firstIndex, secondIndex] = -1 * assessment.Assessment;
@@ -129,13 +137,14 @@ namespace HierarchyAnalysis.mathPart
                     array[secondIndex, firstIndex] = 1;
                 }
             }
-            string str = "";
+
+            string str = assessments.Person.Name+"\n";
             for (int i = 0; i < array.GetLength(0); i++)
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    if (i == j) array[i, j] = 1;
-                    str+=string.Format("{0,5} ",array[i,j].ToString());
+                   
+                    str += string.Format("{0,5} ", array[i, j].ToString());
                 }
                 str += "\n";
             }

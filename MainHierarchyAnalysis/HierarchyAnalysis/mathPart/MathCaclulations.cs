@@ -29,16 +29,30 @@ namespace HierarchyAnalysis.mathPart
         public static List<double> LocalPriority(double[,] array)
         {
             List<double> priority = new List<double>();
-            int countNumber = array.GetLength(1);
+            int countNumber = 0; //array.GetLength(1);
             double multiply;
             for (int i = 0; i < array.GetLength(0); i++)
             {
+                countNumber = 0;
                 multiply = 1;
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    multiply *= array[i, j];
+                    if (array[i, j] != 0)
+                    {
+                        countNumber++;
+                        multiply *= array[i, j];
+                    }
+                    
                 }
-                priority.Add(Math.Pow(multiply, 1.0 / countNumber));
+                if (countNumber<1)
+                {
+                    priority.Add(0);
+                }
+                else
+                {
+                    priority.Add(Math.Pow(multiply, 1.0 / countNumber));
+                }
+                
             }
             return priority;
         }
@@ -48,7 +62,15 @@ namespace HierarchyAnalysis.mathPart
             double sum = array.Sum();
             foreach (double i in array)
             {
-                vs.Add(i / sum);
+                if (i == 0)
+                {
+                    vs.Add(0);
+                }
+                else
+                {
+                    vs.Add(i / sum);
+                }
+                
             }
             return vs;
         }
